@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charaset="UTF-8">
+    <title>My Playground</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.0/font/bootstrap-icons.css">
+    <style> 
+      input { /* input要素（通常のフォーム入力欄）に対するスタイルを指定 */
+        all: unset; /* 要素に適用されるすべてのプロバティを初期化して、デフォルトのスタイルに戻す */
+        transition: width 0.4s, border 0.4s; 
+        width: 0;
+      }
+      input.appear { /* input要素に.appearクラスが適用された場合のみ、このスタイルを適用する */
+        transition: width 0.6s, border 0.6s;
+        border: 1px solid #333;
+        padding: 4px 8px;
+        border-radius: 4px;
+        width: 200px;
+      }
+      #search {
+        font-size: 18px;
+        cursor: pointer; /* 要素の上にカーソルを持っていくことで、カーソルがポインターに変わる */
+      }
+    </style>
+  </head>
+  <body>
+    <input type="text" id="input"> <!--テキスト入力欄を表す。type="text"により、テキストを入力するための欄として表示される。id="input"はこの要素に識別IDを与えている-->
+    <i class="bi bi-search" id="search"></i> <!--bootstrap iconsを使用しているアイコンを表す。<i>要素は意味を持たず、装飾的な要素として使用。
+                                                 class="bi bi-search"はbootstrap iconsのクラスを指定。通常、bootstrap iconsではアイコンをしているためにbiクラスを指定。
+                                                 bi-searchクラスが指定されており、「検索アイコン」を表す。-->
+    
+    <script>
+      //メガネアイコンの要素を取得
+      const search = document.getElementById('search'); // id=searchという識別IDを持つHTM要素をJavaScriptで取得する。取得した要素はsearchという変数に格納
+                                                        // constは変数を定義するキーワードであり、一度割り当てられた後は再代入できない変数。
+                                                        // documentは現在のHTMLドキュメントを表すJavaScriptのグローバルオブジェクト
+                                                        // getElementById()メソッドは与えられたID属性の値に該当するHTML要素を取得する。この場合、id=searchを持つ要素が取得される
+      //入力フォームの要素の取得
+      const input = document.getElementById('input');
+      
+      //メガネアイコンをクリックした時の処理
+      search.addEventListener('click', () => { //取得した要素（id=search）に対してclickイベントを追加
+        //入力フォームを表示知る
+        input.classList.add('appear'); // input要素に対してappear（styleタグに記述したコード）というcssクラスを追加
+        //入力フォームにフォーカスを当てる
+        input.focus(); // input要素が呼び出された後、ユーザーが直接テキストに入力できる状態
+                       // forcus()メソッドを呼び出すことで、この要素にフォーカスを当てれる
+      });
+      
+      //入力フォームからフォーカスが外れた時の処理
+      input.addEventListener('blur', () => { // blurイベントは要素がフォーカスを失った時（ユーザーが入力欄をクリックし、他の場所をクリックしたときなど）に発生
+        //入力フォームを非表示にする
+        input.classList.remove('appear'); //input要素からappearというcssクラスを削除
+                                          //input要素を表示するためのクラスが適用されていたが、blurイベントが発生した場合、入力フォームを非常時にするためにクラスを削除
+      });
+    </script>
+  </body>
+</html>
